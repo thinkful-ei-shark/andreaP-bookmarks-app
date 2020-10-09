@@ -4,13 +4,19 @@ import store from './store';
 import bookmarkelement from './bookmark'
 import api from './api'
 
+
 // Start Page Template Here: 
 
+
+  //api.fetchBookmarks()
+ 
   
 
 
  
 function main() {
+  api.fetchBookmarks();
+  bookmarkelement.bookmarksList(store.storeList.bookmarks);
   bookmarkelement.handleFilterBookmarks();
   bookmarkelement.handleEditSubmit();
   bookmarkelement.handleCancelEdit();
@@ -21,6 +27,6 @@ function main() {
   bookmarkelement.handleCollapse();
   bookmarkelement.handleAddFormSubmit();
   bookmarkelement.handleEditButton();
-  bookmarkelement.render(bookmarkelement.generatePage);
+  bookmarkelement.render();
 }  
 $(main);

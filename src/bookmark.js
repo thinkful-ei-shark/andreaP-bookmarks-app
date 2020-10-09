@@ -4,9 +4,12 @@ import $ from 'jquery';
 import storeItem from './store';
 import api from './api';
 
+
 const store = storeItem.storeList;
 
-  const generatePage = function(html){
+
+const render = function () {
+  
       console.log('page has been rendered')
     const startTemplate = `
       <div class ="title"><h3>Current Bookmarks</h3></div>`
@@ -29,14 +32,16 @@ const store = storeItem.storeList;
     if (store.adding === true ) {
         formTemplate = addNewBookMarkForm();    
     }
-    return startTemplate + formTemplate + filterArea + bookmarksList(store.bookmarks)
+   const pageLoad = startTemplate + formTemplate + filterArea + bookmarksList(store.bookmarks);
+   $('main').html(pageLoad);
   };
 
 
-      const bookmarksList = function (bookmarks) {
+      const bookmarksList = function (bookmark) {
+        console.log("line 46 bookmarks", bookmark)
              let allBookmarks = ''
-        for (let i = 0; i < bookmarks.length; i++) {
-            allBookmarks += itemDisplayView(bookmarks[i]);
+        for (let i = 0; i < bookmark.length; i++) {
+            allBookmarks += itemDisplayView(bookmark[i]);
         }  
         return allBookmarks;
     }
@@ -88,7 +93,8 @@ const store = storeItem.storeList;
                 </div>
               </li></section>`; 
                 } 
-            }
+            
+}
     function getBookmarkIdFromElement(bookmark) {
           return $(bookmark).closest('li').data('item-id');
     };
@@ -167,9 +173,10 @@ const handleAddFormSubmit = function() {
         $('main').on('click', '.delete-button', function (event) {
         const id = getBookmarkIdFromElement(event.currentTarget);
                  api.deleteBookmark(id);
-                  console.log(id + ' delete button')});
-                 render();       
-        
+                  console.log(id + ' delete button');
+                  api.fetchBookmarks()
+                 .then(render());            
+        });
      }
      const handleEditButton = function() {
         $('main').on('click', '.edit-button', function (event) {
@@ -213,17 +220,17 @@ const handleAddFormSubmit = function() {
           });
    };
 
-   const render = function () {
-    $('main').html(generatePage());
-}
+  
+
    
    $(function() {
     console.log('app loading');
+   
 });
 
 
     export default {
-        generatePage,
+        bookmarksList,
         handleFilterBookmarks,
         handleCancelEdit,
         handleEditSubmit,

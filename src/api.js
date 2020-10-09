@@ -1,13 +1,13 @@
 import $ from 'jquery';
+import store from './store'
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/andreaP';
 
 const fetchApi = function(...args){
-    let error;
+    let error = null;
     return fetch(...args)
       .then(res => {
         if(!res.ok){
           error = {code: res.status};
-           
         }  
         return res.json();
       })
@@ -22,8 +22,13 @@ const fetchApi = function(...args){
   };
 
 const fetchBookmarks = function(){
-    return fetchApi(`${BASE_URL}/bookmarks`);
-  };
+   return fetchApi(`${BASE_URL}/bookmarks`)
+   .then(items => {
+     items.forEach(item => {
+     store.addBookmark(item);    
+     }) 
+   })
+   };
   
   const addNewBookmark = function(title, url, desc, rating) {
     const newBookmark = JSON.stringify(
