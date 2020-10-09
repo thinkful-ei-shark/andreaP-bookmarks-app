@@ -4,7 +4,7 @@ import $ from 'jquery';
 import storeItem from './store';
 import api from './api';
 
-
+console.log(storeItem)
 const store = storeItem.storeList;
 
 
@@ -92,7 +92,9 @@ const render = function () {
                   <button class="delete-button" type="button">Delete</button>
                 </div>
               </li></section>`; 
-                } 
+                } else {
+                  return ''
+                }
             
 }
     function getBookmarkIdFromElement(bookmark) {
@@ -147,18 +149,18 @@ function handleToggleAddForm() {
 
 
 const handleAddFormSubmit = function() {
-    $('main').on('submit', function (event) {
-        event.preventDefault;
+    $('main').on('submit', '#submit-new-form', function (event) {
+        event.preventDefault();
         const title = $('#add-bookmark-name').val();
         const url = $('#add-bookmark-url').val();
         const desc = $('#add-bookmark-description').val();
         const rating = $('#add-rating').val();
         api.addNewBookmark(title, url, desc, rating)
           .then(newBookmark => {
-            store.bookmarks.push(newBookmark); });
+            storeItem.addBookmark(newBookmark); 
             store.adding = false;
             render();
-         
+          })
       })
        };
 
@@ -172,10 +174,12 @@ const handleAddFormSubmit = function() {
      const handleDeleteButton = function() {
         $('main').on('click', '.delete-button', function (event) {
         const id = getBookmarkIdFromElement(event.currentTarget);
-                 api.deleteBookmark(id);
+                 api.deleteBookmark(id).then( () => {
+                   storeItem.deleteBookmark(id)
+                   render()
+                 });
                   console.log(id + ' delete button');
-                  api.fetchBookmarks()
-                 .then(render());            
+                           
         });
      }
      const handleEditButton = function() {
@@ -197,12 +201,14 @@ const handleAddFormSubmit = function() {
               const desc = $('#new-bookmark-description').val();
                const rating = $('#new-rating').val();
                 const newData = {title:`${title}`, url:`${url}`, desc:`${desc}`, rating:`${rating}`}
-            api.editBookmark(id, newData)
+                console.log(newData)
+                api.editBookmark(id, newData)
                 .then(newData => {                
                 const bookmark = store.bookmarks.find(bookmark => bookmark.id === id);
-                    bookmark.editing = false; })
+                    bookmark.editing = false; 
                     render();
                    });
+                  })
      }
      const handleCancelEdit = function() {
         $('main').on('click', '#cancel-edit', event => {
@@ -221,7 +227,10 @@ const handleAddFormSubmit = function() {
    };
 
   
-
+function initialize () {
+  api.fetchBookmarks() .then( () => render() )
+  render();
+}
    
    $(function() {
     console.log('app loading');
@@ -230,6 +239,7 @@ const handleAddFormSubmit = function() {
 
 
     export default {
+      initialize,
         bookmarksList,
         handleFilterBookmarks,
         handleCancelEdit,

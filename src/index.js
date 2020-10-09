@@ -15,7 +15,7 @@ import api from './api'
 
  
 function main() {
-  api.fetchBookmarks();
+  bookmarkelement.initialize();
   bookmarkelement.bookmarksList(store.storeList.bookmarks);
   bookmarkelement.handleFilterBookmarks();
   bookmarkelement.handleEditSubmit();
@@ -27,6 +27,6 @@ function main() {
   bookmarkelement.handleCollapse();
   bookmarkelement.handleAddFormSubmit();
   bookmarkelement.handleEditButton();
-  bookmarkelement.render();
+  
 }  
 $(main);
