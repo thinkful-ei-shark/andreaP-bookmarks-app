@@ -7,32 +7,32 @@ import api from './api';
 console.log(storeItem)
 const store = storeItem.storeList;
 
+const startTemplate = function() {
+  return `
+  <div class ="title"><h3>Current Bookmarks:</h3></div>`
+}
+const filterArea = function () {
+  return `<div class="filter-bookmarks">
+<h4>Filter Results By Rating:</h4>
+  <select id="filter-select">
+    <option disabled selected hidden>Filter by</option>
+    <option value=5>Show 5 Stars</option>
+    <option value=4>Show 4+ Stars</option>
+    <option value=3>Show 3+ Stars</option>
+    <option value=2>Show 2+ Stars</option>
+    <option value=1>Show 1+ Stars</option>
+    <option value=0>Show All</option>
+  </select>
+</div>`} 
 
 const render = function () {
-  
-      console.log('page has been rendered')
-    const startTemplate = `
-      <div class ="title"><h3>Current Bookmarks:</h3></div>`
-      
-      let filterArea = `
-      <div class="filter-bookmarks">
-      <h4>Filter Results By Rating:</h4>
-        <select id="filter-select">
-          <option disabled selected hidden>Filter by</option>
-          <option value=5>Show 5 Stars</option>
-          <option value=4>Show 4+ Stars</option>
-          <option value=3>Show 3+ Stars</option>
-          <option value=2>Show 2+ Stars</option>
-          <option value=1>Show 1+ Stars</option>
-          <option value=0>Show All</option>
-        </select>
-      </div>`
+
     console.log(store)
     let formTemplate = `<button name="add-new-bookmark-btn" id="add-new-bookmark-btn">+ Add New</button>`;  
     if (store.adding === true ) {
         formTemplate = addNewBookMarkForm();    
     }
-   const pageLoad = filterArea + startTemplate + formTemplate + bookmarksList(store.bookmarks);
+   const pageLoad = filterArea() + startTemplate() + formTemplate + bookmarksList(store.bookmarks);
    $('main').html(pageLoad);
   };
 
@@ -112,14 +112,14 @@ function handleToggleAddForm() {
 }
     const addNewBookMarkForm = function() {
        const newBookMarkForm = `<form name="form" id ="submit-new-form">
-      <label for="add-bookmark-url" class="add-new">Bookmark URL:</label>
+      <label for="add-bookmark-url" class="add-new" id="add-bookmark-url" ">Bookmark URL:</label>
       <input type="text" name="add-bookmark-url" id="add-bookmark-url" placeholder="https://samplelink.code" required />
-      <label for="add-bookmark-name" class="add-new">Bookmark Name:</label>
+      <label for="add-bookmark-name" class="add-new" id="add-bookmark-name">Bookmark Name:</label>
       <input type="text" name="add-bookmark-name" id="add-bookmark-name" placeholder="Link name" required />
-      <p><label for="add-bookmark-description" class="add-new">Description</label>
+      <p><label for="add-bookmark-description" class="add-new" id="add-bookmark-description">Description</label>
       <input type="textarea" name="add-bookmark-description" id="add-bookmark-description" placeholder="Describe your link" required /></p>
         <div class="add-new rating">
-        <label for "add-bookmark-rating" name="bookmark-rating" class="stars">Enter Rating (1 - 5)</label>
+        <label for "add-bookmark-rating" name="bookmark-rating" class="stars" id="add-rating">Enter Rating (1 - 5)</label>
         <input type="number" size="3" min="1" max="5" name="rating" id="add-rating" required>
        </div>
       <button type="submit" name="submit-new" id="submit-new" class="submit-new">Submit</button>
