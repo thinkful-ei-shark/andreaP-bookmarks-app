@@ -12,7 +12,7 @@ const render = function () {
   
       console.log('page has been rendered')
     const startTemplate = `
-      <div class ="title"><h3>Current Bookmarks</h3></div>`
+      <div class ="title"><h3>Current Bookmarks:</h3></div>`
       
       let filterArea = `
       <div class="filter-bookmarks">
@@ -32,7 +32,7 @@ const render = function () {
     if (store.adding === true ) {
         formTemplate = addNewBookMarkForm();    
     }
-   const pageLoad = startTemplate + formTemplate + filterArea + bookmarksList(store.bookmarks);
+   const pageLoad = filterArea + startTemplate + formTemplate + bookmarksList(store.bookmarks);
    $('main').html(pageLoad);
   };
 
@@ -52,10 +52,10 @@ const render = function () {
                     return `
               <li data-item-id="${bookmark.id}" class="bookmark-item expanded">
                 <h2 class="bookmark-name">${bookmark.title}</h2>
-                <p class="description">${bookmark.desc}</p>
                 <h3 class="rating">Rating: ${bookmark.rating} Stars </h3>
+                <h4 class="description">Description: ${bookmark.desc}</h4>                
                 <div class="visit-site">
-                  <a href="${bookmark.url}">Visit Site</a>
+                  <h4><a href="${bookmark.url}">Visit Site</a></h4>
                 </div>
                 <div class="bookmark-controls">
                   <button class="collapse-button" type="button">Collapse</button>
@@ -63,32 +63,13 @@ const render = function () {
                    </div>
               </li>`;
                 } 
-              if (bookmark.editing === true) {
-                   return `
-                   <li data-item-id="${bookmark.id}" class="bookmark-item">
-               <form name="edit-form" class="edit-form" id ="edit-form" >
-              <label for="add-bookmark-url" class="add-new">Current URL: ${bookmark.url} New URL: </label>                 
-              <input type="text" name="add-bookmark-url" id="new-bookmark-url" placeholder= "${bookmark.url}" />
-              <label for="add-bookmark-name" class="add-new">Current Name: ${bookmark.title} New Title: </label>
-              <input type="text" name="add-bookmark-name" id="new-bookmark-name" placeholder="${bookmark.title}" />
-              <label for="add-bookmark-description" class="add-new">Current Description: ${bookmark.desc} New Description: </label>
-              <input type="textarea" name="add-bookmark-description" id="new-bookmark-description" placeholder="${bookmark.desc}">
-              <div class="add-new rating">
-              <label for "add-bookmark-rating" name="bookmark-rating" class="stars"> Current Rating: ${bookmark.rating} New Rating:</label>
-              <input type="number" name="rating" size="3" min="1" max="5" id="new-rating">
-              </div>
-              <button type="submit" name="edit-item" id="edit-item" class="submit">Submit</button>
-              <button type="submit" name="cancel-submit" id="cancel-edit" class="submit">Cancel</button>
-              </form>`    
-             }
                if (bookmark.rating >= store.filter) {
                     return `
-               <section> <li data-item-id="${bookmark.id}" class="bookmark-item">
+               <section class="bookmark-list"> <li data-item-id="${bookmark.id}" class="bookmark-item">
                 <h2 class="bookmark-name">${bookmark.title}</h2>
-                <h3 class="rating">Rating: ${bookmark.rating} Stars</h3>
+                <h4 class="rating">Rating: ${bookmark.rating} Stars</h4>
                 <div class="bookmark-controls">
                   <button class="expand-button" type="button">Expand</button>
-                  <button class="edit-button" id="edit-button" type="button">Edit Bookmark</button>
                   <button class="delete-button" type="button">Delete</button>
                 </div>
               </li></section>`; 
@@ -182,42 +163,9 @@ const handleAddFormSubmit = function() {
                            
         });
      }
-     const handleEditButton = function() {
-        $('main').on('click', '.edit-button', function (event) {
-        const id = getBookmarkIdFromElement(event.currentTarget);
-        const bookmark = store.bookmarks.find(bookmark => bookmark.id === id);
-        bookmark.editing = true;
-             console.log(id + ' edit button')
-                 render();       
-        });
-     }
 
-     const handleEditSubmit = function() {
-        $('main').on('submit', '#edit-form', event => {
-            event.preventDefault();
-            const id = getBookmarkIdFromElement(event.currentTarget);
-               const title = $('#new-bookmark-name').val();
-                const url = $('#new-bookmark-url').val();
-              const desc = $('#new-bookmark-description').val();
-               const rating = $('#new-rating').val();
-                const newData = {title:`${title}`, url:`${url}`, desc:`${desc}`, rating:`${rating}`}
-                console.log(newData)
-                api.editBookmark(id, newData)
-                .then(newData => {                
-                const bookmark = store.bookmarks.find(bookmark => bookmark.id === id);
-                    bookmark.editing = false; 
-                    render();
-                   });
-                  })
-     }
-     const handleCancelEdit = function() {
-        $('main').on('click', '#cancel-edit', event => {
-         const id = getBookmarkIdFromElement(event.currentTarget);
-            const bookmark = store.bookmarks.find(bookmark => bookmark.id === id);
-            bookmark.editing = false;
-            render();  
-        })          
-            }
+     
+    
  const handleFilterBookmarks = function () {
      $('main').on('change', '#filter-select', event => {
         console.log('sort click')
@@ -242,8 +190,6 @@ function initialize () {
       initialize,
         bookmarksList,
         handleFilterBookmarks,
-        handleCancelEdit,
-        handleEditSubmit,
         handleCancelSubmit,
        handleDeleteButton,
         handleAddFormSubmit,
@@ -251,7 +197,6 @@ function initialize () {
         handleToggleAddForm,
         handleExpand,
         handleCollapse,
-        handleEditButton,
         render
       };
 

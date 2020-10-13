@@ -18,15 +18,12 @@ function main() {
   bookmarkelement.initialize();
   bookmarkelement.bookmarksList(store.storeList.bookmarks);
   bookmarkelement.handleFilterBookmarks();
-  bookmarkelement.handleEditSubmit();
-  bookmarkelement.handleCancelEdit();
   bookmarkelement.handleCancelSubmit();
   bookmarkelement.handleDeleteButton();
   bookmarkelement.handleToggleAddForm();
   bookmarkelement.handleExpand();
   bookmarkelement.handleCollapse();
   bookmarkelement.handleAddFormSubmit();
-  bookmarkelement.handleEditButton();
   
 }  
 $(main);
