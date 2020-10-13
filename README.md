@@ -1,5 +1,10 @@
 # andreaP-bookmarks-app
 
+Link to visit live site: <a href="https://thinkful-ei-shark.github.io/andreaP-bookmarks-app/dist/">https://thinkful-ei-shark.github.io/andreaP-bookmarks-app/dist/</a>
+
+Bookmarks App Project for Asynchronous Web Apps Module
+
+
 User Stories:
 
 I can add bookmarks to my bookmark list. Bookmarks contain:
@@ -20,6 +25,10 @@ I can remove bookmarks from my bookmark list
 I receive appropriate feedback when I cannot submit a bookmark
 
 Check all validations in the API documentation (e.g. title and url field required)
-I can select from a dropdown (a <select> element) a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection
 
-Link to visit live site: https://thinkful-ei-shark.github.io/andreaP-bookmarks-app/dist/
+
+I can select from a dropdown (a <select> element) a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection.
+  
+  
+
+
