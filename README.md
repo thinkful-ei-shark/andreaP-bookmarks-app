@@ -1,5 +1,10 @@
 # andreaP-bookmarks-app
 
+Link to visit live site: <a href="https://thinkful-ei-shark.github.io/andreaP-bookmarks-app/dist/">https://thinkful-ei-shark.github.io/andreaP-bookmarks-app/dist/</a>
+
+Bookmarks App Project for Asynchronous Web Apps Module
+
+
 User Stories:
 
 I can add bookmarks to my bookmark list. Bookmarks contain:
@@ -26,4 +31,4 @@ I can select from a dropdown (a <select> element) a "minimum rating" to filter t
   
   
 
-Link to visit live site: https://thinkful-ei-shark.github.io/andreaP-bookmarks-app/dist/
+
