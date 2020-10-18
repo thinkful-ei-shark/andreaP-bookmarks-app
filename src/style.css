@@ -152,7 +152,9 @@
     flex-direction: column;
     padding: 1rem 0;
     margin: 5px;
-    border: 1px solid #016669;
+    padding: 3px;
+    background: #95fafa;
+    border: 2px solid #016669;
   }
   
   #new-bookmark-form p {
@@ -160,17 +162,16 @@
     border: 1px solid #016669;
   }
   
-  #new-bookmark-desc {
-    resize: none;
-  }
   
   #submit-new-form-input {
     width: 100%;
     background: rgb(198, 248, 244);
-    border: 1px solid #00d4db;
+    border: 1px solid #016669;
     padding: .25rem;
   }
-  
+  #add-bookmark-description {
+    width:100%
+  }
   .new-bookmark-rating {
     width: 100%;
   }

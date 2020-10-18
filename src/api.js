@@ -39,6 +39,7 @@ const fetchBookmarks = function(){
             desc: desc,
             rating: rating
         });
+        console.log(newBookmark)
     return fetchApi(`${BASE_URL}/bookmarks`, {
         method: 'POST',
         headers: {

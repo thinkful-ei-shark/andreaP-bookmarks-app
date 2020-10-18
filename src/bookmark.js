@@ -13,9 +13,9 @@ const startTemplate = function() {
 }
 const filterArea = function () {
   return `<div class="filter-bookmarks">
-<h4>Filter Results By Rating:</h4>
-  <select id="filter-select">
-    <option disabled selected hidden>Filter by</option>
+<label for ="filter-select"><h4>Filter Results by Rating:</h4></label> 
+<select id="filter-select">
+    <option disabled selected hidden>Show All</option>
     <option value=5>Show 5 Stars</option>
     <option value=4>Show 4+ Stars</option>
     <option value=3>Show 3+ Stars</option>
@@ -112,14 +112,14 @@ function handleToggleAddForm() {
 }
     const addNewBookMarkForm = function() {
        const newBookMarkForm = `<form name="form" id ="submit-new-form">
-      <label for="add-bookmark-url" class="add-new" id="add-bookmark-url" ">Bookmark URL:</label>
-      <input type="text" name="add-bookmark-url" id="add-bookmark-url" placeholder="https://samplelink.code" required />
-      <label for="add-bookmark-name" class="add-new" id="add-bookmark-name">Bookmark Name:</label>
-      <input type="text" name="add-bookmark-name" id="add-bookmark-name" placeholder="Link name" required />
-      <p><label for="add-bookmark-description" class="add-new" id="add-bookmark-description">Description</label>
-      <input type="textarea" name="add-bookmark-description" id="add-bookmark-description" placeholder="Describe your link" required /></p>
+      <label for="add-bookmark-url" class="add-new">Bookmark URL:</label>
+      <input type="text" name="new-bookmark-url" id="add-bookmark-url" placeholder="https://samplelink.code" required />
+      <label for="add-bookmark" class="add-new">Bookmark Name:</label>
+      <input type="text" name="add-bookmark-name" id="add-bookmark" placeholder="Link name" required />
+      <p><label for="add-bookmark-description">Description:</label>
+      <input type="textarea" name="bookmark-description" id="add-bookmark-description" placeholder="Describe your link" required /></p>
         <div class="add-new rating">
-        <label for "add-bookmark-rating" name="bookmark-rating" class="stars" id="add-rating">Enter Rating (1 - 5)</label>
+        <label for "add-rating" name="bookmark-rating" class="stars">Enter Rating (1 - 5)</label>
         <input type="number" size="3" min="1" max="5" name="rating" id="add-rating" required>
        </div>
       <button type="submit" name="submit-new" id="submit-new" class="submit-new">Submit</button>
@@ -132,7 +132,7 @@ function handleToggleAddForm() {
 const handleAddFormSubmit = function() {
     $('main').on('submit', '#submit-new-form', function (event) {
         event.preventDefault();
-        const title = $('#add-bookmark-name').val();
+        const title = $('#add-bookmark').val();
         const url = $('#add-bookmark-url').val();
         const desc = $('#add-bookmark-description').val();
         const rating = $('#add-rating').val();
