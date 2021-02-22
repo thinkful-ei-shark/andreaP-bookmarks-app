@@ -7,26 +7,31 @@
     font-weight: 600;
   }
   
-  
+ body {
+   margin: 1px 1%;
+   background-color: #e3e7e7;
+ }
+
   h1 {
     text-align: center;
     margin: 0;
-    font-size: 30px;
+    font-size: 32px;
   }
   h2 {
     text-align: center;
     margin: 5px;
-    font-size: 26px;
+    font-size: 29px;
 
   }
   
   h3 {
-    font-size: 22px;
-    margin-top: 2px;
+    font-size: 26px;
+    margin: 1px;
+    padding: 2px;
   }
   
   h4 {
-    font-size: 18px;
+    font-size: 20px;
   }
   header, main {
     background: #2decec;
@@ -37,6 +42,7 @@
   
   main {
     border: 2px solid #004353 ;
+    margin-bottom: 0;
   }
   
   .filter-bookmarks {
@@ -187,11 +193,13 @@
   }
   
   
-  @media screen and (min-width: 50rem) {
+  @media screen and (max-width: 700px) {
     header, main {
       max-width: 90rem;
     }
-  
+  body {
+    margin: 1px 3px 0px 3px;
+  }
     .bookmark {
       display: flex;
       flex-direction: row;

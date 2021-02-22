@@ -38,7 +38,6 @@ const render = function () {
 
 
       const bookmarksList = function (bookmark) {
-        console.log("line 46 bookmarks", bookmark)
              let allBookmarks = ''
         for (let i = 0; i < bookmark.length; i++) {
             allBookmarks += itemDisplayView(bookmark[i]);
